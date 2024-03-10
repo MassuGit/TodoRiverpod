@@ -3,14 +3,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
   runApp(
-    ProviderScope(child: TodoApp()),
+    ProviderScope(child: TodoListPage()),
   );
 }
 
 final homeTextProvider = Provider((ref) => 'Hello xiaoting!');
 
-class TodoApp extends ConsumerWidget {
-  TodoApp({super.key});
+class TodoListPage extends ConsumerWidget {
+  TodoListPage({super.key});
 
   final todoList = [
     "todo1",
