@@ -10,7 +10,28 @@ class AddTodoPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Todo追加画面'),
       ),
-      body: const Text('Hello シャオティン'),
+      body: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Todoを入力してください',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('追加'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
