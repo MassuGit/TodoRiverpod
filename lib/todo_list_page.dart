@@ -19,40 +19,47 @@ class TodoListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Stack(
-      children: [
-        ListView.builder(
-          itemCount: todoList.length,
-          itemBuilder: (BuildContext context, index) {
-            return _TodoItem(todoTitle: todoList[index]);
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Align(
-            alignment: Alignment.bottomRight,
-            child: InkWell(
-              onTap: () {
-                context.push('/addTodo');
-              },
-              child: Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.deepPurpleAccent,
-                    width: 2.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('HELLO XIAOTING'),
+      ),
+      body: Stack(
+        children: [
+          ListView.builder(
+            itemCount: todoList.length,
+            itemBuilder: (BuildContext context, index) {
+              return _TodoItem(todoTitle: todoList[index]);
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Material(
+                child: InkWell(
+                  onTap: () {
+                    context.push('/addTodo');
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: Colors.deepPurpleAccent,
+                        width: 2.0,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.deepPurpleAccent,
+                    ),
                   ),
-                ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.deepPurpleAccent,
                 ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
