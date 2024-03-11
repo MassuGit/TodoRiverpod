@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-void main() {
-  runApp(
-    ProviderScope(child: TodoListPage()),
-  );
-}
-
-final homeTextProvider = Provider((ref) => 'Hello xiaoting!');
 
 class TodoListPage extends ConsumerWidget {
   TodoListPage({super.key});
@@ -26,26 +19,40 @@ class TodoListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final homeText = ref.read(homeTextProvider);
-
-    return MaterialApp(
-      title: "Title",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(homeText),
-        ),
-        body: ListView.builder(
+    return Stack(
+      children: [
+        ListView.builder(
+          itemCount: todoList.length,
           itemBuilder: (BuildContext context, index) {
-            if (index < todoList.length) {
-              return _TodoItem(todoTitle: todoList[index]);
-            }
-            return null;
+            return _TodoItem(todoTitle: todoList[index]);
           },
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: InkWell(
+              onTap: () {
+                context.push('/addTodo');
+              },
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.deepPurpleAccent,
+                    width: 2.0,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.deepPurpleAccent,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
