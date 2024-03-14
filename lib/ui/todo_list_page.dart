@@ -24,7 +24,7 @@ class TodoListPage extends ConsumerWidget {
           ListView.builder(
             itemCount: todoList.length,
             itemBuilder: (BuildContext context, index) {
-              return _TodoItem(todoTitle: todoList[index].title);
+              return _TodoItemRecord(todoTitle: todoList[index].title);
             },
           ),
           Padding(
@@ -60,8 +60,8 @@ class TodoListPage extends ConsumerWidget {
   }
 }
 
-class _TodoItem extends StatelessWidget {
-  const _TodoItem({required this.todoTitle});
+class _TodoItemRecord extends StatelessWidget {
+  const _TodoItemRecord({required this.todoTitle});
 
   final String todoTitle;
 
