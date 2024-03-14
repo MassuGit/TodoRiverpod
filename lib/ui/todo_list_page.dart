@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todo_riverpod/external_interface/shared_preference_service.dart';
 
 class TodoListPage extends ConsumerWidget {
-  TodoListPage({super.key});
-
-  final todoList = [
-    "todo1",
-    "todo10",
-    "todo15",
-    "todo100",
-    "todo150",
-    "todo200",
-    "todo230",
-    "todo300",
-    "todo500",
-  ];
+  const TodoListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final sharedPreferences = ref.read(sharedPreferenceProvider).value;
+
+    final todoList = sharedPreferences != null
+        ? SharedPreferenceService(sharedPreferences: sharedPreferences)
+            .fetchTodoList()
+        : [];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('HELLO XIAOTING'),
@@ -28,7 +24,7 @@ class TodoListPage extends ConsumerWidget {
           ListView.builder(
             itemCount: todoList.length,
             itemBuilder: (BuildContext context, index) {
-              return _TodoItem(todoTitle: todoList[index]);
+              return _TodoItem(todoTitle: todoList[index].title);
             },
           ),
           Padding(

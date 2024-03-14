@@ -31,9 +31,13 @@ class AddTodoPage extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {
-                SharedPreferenceService()
-                    .saveTodoItem(title: todoTextFieldController.text);
+              onPressed: () async {
+                final sharedPreferences =
+                    ref.read(sharedPreferenceProvider).value;
+                if (sharedPreferences != null) {
+                  SharedPreferenceService(sharedPreferences: sharedPreferences)
+                      .saveTodoItem(title: todoTextFieldController.text);
+                }
               },
               child: const Text('追加'),
             ),
