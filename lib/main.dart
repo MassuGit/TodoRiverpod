@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_riverpod/external_interface/shared_preference_service.dart';
 import 'package:todo_riverpod/router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    const ProviderScope(child: Main()),
+    ProviderScope(
+      overrides: [
+        sharedPreferenceProvider
+            .overrideWithValue(await SharedPreferences.getInstance()),
+      ],
+      child: const Main(),
+    ),
   );
 }
 

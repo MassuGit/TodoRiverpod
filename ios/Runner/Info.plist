@@ -10,7 +10,8 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
+	<key>CFBundleInfoDictionaryVersion</key><key>FLTEnableImpeller</key>
+	<false />
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>todo_riverpod</string>

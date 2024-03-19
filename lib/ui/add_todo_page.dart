@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:todo_riverpod/external_interface/shared_preference_service.dart';
+import 'package:todo_riverpod/external_interface/repositories/local_data_repository_impl.dart';
 
 class AddTodoPage extends HookConsumerWidget {
   const AddTodoPage({super.key});
@@ -32,12 +32,9 @@ class AddTodoPage extends HookConsumerWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () async {
-                final sharedPreferences =
-                    ref.read(sharedPreferenceProvider).value;
-                if (sharedPreferences != null) {
-                  SharedPreferenceService(sharedPreferences: sharedPreferences)
-                      .saveTodoItem(title: todoTextFieldController.text);
-                }
+                ref
+                    .read(localDataRepositoryProvider)
+                    .saveTodoItem(title: todoTextFieldController.text);
               },
               child: const Text('追加'),
             ),

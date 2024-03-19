@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todo_riverpod/external_interface/shared_preference_service.dart';
+import 'package:todo_riverpod/external_interface/repositories/local_data_repository_impl.dart';
 
-class TodoListPage extends ConsumerWidget {
+class TodoListPage extends HookConsumerWidget {
   const TodoListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sharedPreferences = ref.read(sharedPreferenceProvider).value;
+    // 画面戻ってきたときに、最新のtodoListになっていない
+    final todoList = ref.read(localDataRepositoryProvider).fetchTodoList();
 
-    final todoList = sharedPreferences != null
-        ? SharedPreferenceService(sharedPreferences: sharedPreferences)
-            .fetchTodoList()
-        : [];
 
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +22,12 @@ class TodoListPage extends ConsumerWidget {
           ListView.builder(
             itemCount: todoList.length,
             itemBuilder: (BuildContext context, index) {
-              return _TodoItemRecord(todoTitle: todoList[index].title);
+              return InkWell(
+                child: _TodoItemRecord(todoTitle: todoList[index].title),
+                onTap: () {
+                  context.push('/updateTodo', extra: todoList[index]);
+                },
+              );
             },
           ),
           Padding(
