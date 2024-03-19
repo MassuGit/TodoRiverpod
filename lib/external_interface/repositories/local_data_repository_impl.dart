@@ -57,9 +57,7 @@ class LocalDataRepositoryImpl {
         return todoItemString;
       }
     }).toList();
-    print('todoLsitStringUpdated = $todoListStringUpdated');
     await sharedPreferences.setStringList('todoListKey', todoListStringUpdated);
-    print('更新完了');
   }
 
   Future<void> clearAllData() async {

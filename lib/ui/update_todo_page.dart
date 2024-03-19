@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:todo_riverpod/entities/todo_item.dart';
-import 'package:todo_riverpod/external_interface/repositories/local_data_repository_impl.dart';
+import 'package:todo_riverpod/state_notifiers/todo_list_notifier.dart';
 
 class UpdateTodoPage extends HookConsumerWidget {
   const UpdateTodoPage({
@@ -59,12 +59,12 @@ class UpdateTodoPage extends HookConsumerWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  ref.read(localDataRepositoryProvider).updateTodoItem(
+                  ref.read(todoListProvider.notifier).updateTodoItem(
                       todoId: todoItemProps.todoId,
                       title: todoTitleTextFieldController.text,
                       content: todoContentTextFieldController.text);
                 },
-                child: Text('更新'),
+                child: const Text('更新'),
               ),
             ),
           ],
@@ -95,7 +95,6 @@ class TodoTextField extends StatelessWidget {
         fillColor: Colors.grey.withOpacity(0.2),
       ),
       onChanged: (text) {
-        print(text);
         controller.text = text;
       },
     );

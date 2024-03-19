@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:todo_riverpod/external_interface/repositories/local_data_repository_impl.dart';
+import 'package:todo_riverpod/state_notifiers/todo_list_notifier.dart';
 
 class AddTodoPage extends HookConsumerWidget {
   const AddTodoPage({super.key});
@@ -33,7 +33,7 @@ class AddTodoPage extends HookConsumerWidget {
             child: ElevatedButton(
               onPressed: () async {
                 ref
-                    .read(localDataRepositoryProvider)
+                    .read(todoListProvider.notifier)
                     .saveTodoItem(title: todoTextFieldController.text);
               },
               child: const Text('追加'),
