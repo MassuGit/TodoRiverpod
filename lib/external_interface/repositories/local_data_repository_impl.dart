@@ -31,7 +31,7 @@ class LocalDataRepositoryImpl {
     await sharedPreferences.setInt('maxIdKey', maxId + 1);
   }
 
-  List<TodoItem> fetchTodoList() {
+  Future<List<TodoItem>> fetchTodoList() async {
     final todoListString = sharedPreferences.getStringList('todoListKey') ?? [];
     return todoListString.map((todoItemString) {
       final todoItem = json.decode(todoItemString) as Map<String, dynamic>;

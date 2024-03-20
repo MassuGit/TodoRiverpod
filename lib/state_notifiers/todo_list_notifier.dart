@@ -15,8 +15,8 @@ class TodoListNotifier extends StateNotifier<List<TodoItem>> {
 
   final LocalDataRepositoryImpl localDataRepositoryImpl;
 
-  void fetchTodoList() {
-    final todoList = localDataRepositoryImpl.fetchTodoList();
+  Future<void> fetchTodoList() async {
+    final todoList = await localDataRepositoryImpl.fetchTodoList();
     state = todoList;
   }
 
