@@ -34,4 +34,11 @@ class TodoListNotifier extends StateNotifier<List<TodoItem>> {
         todoId: todoId, title: title, content: content);
     fetchTodoList();
   }
+
+  void deleteTodoItem({
+    required int todoId,
+  }) {
+    localDataRepositoryImpl.deleteTodoItem(todoId: todoId);
+    fetchTodoList();
+  }
 }

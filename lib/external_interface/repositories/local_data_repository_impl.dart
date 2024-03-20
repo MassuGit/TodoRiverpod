@@ -60,6 +60,17 @@ class LocalDataRepositoryImpl {
     await sharedPreferences.setStringList('todoListKey', todoListStringUpdated);
   }
 
+  void deleteTodoItem({
+    required int todoId,
+  }) {
+    final todoListString = sharedPreferences.getStringList('todoListKey') ?? [];
+    final todoListStringUpdated = todoListString.where((todoItemString) {
+      final todoItem = TodoItem.fromJson(json.decode(todoItemString));
+      return todoItem.todoId != todoId;
+    }).toList();
+    sharedPreferences.setStringList('todoListKey', todoListStringUpdated);
+  }
+
   Future<void> clearAllData() async {
     await sharedPreferences.clear();
   }
